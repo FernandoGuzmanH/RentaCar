@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="../css/style.css"/>
+        <link rel="stylesheet" href="template/style.css"/>
+    </h:head>
+    <h:body>
+     
+         <ui:include src="../view/template/sideBar.xhtml"/>
+         <section>
+        <div class="header">
+            <h1>#{vehiculosController.user.ID_empresas.nombre}</h1>
+        </div>
+
+        <div class="topnav">
+
+        </div>
+
+        <div class="row">
+            <div class="leftcolumn">
+                <div class="card">
+                    <p:panel id="horizontal" style="
+                             text-align: center;; width: 315px" header="Vehiculos"  toggleOrientation="horizontal">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <h:form>
+
+                                <h:panelGrid columns="1">
+                                    <p:outputLabel value="Color"/>
+                                    <p:inputText value="#{vehiculosController.vehiculos.color}"/>
+
+                                    <p:outputLabel value="Tipo de Vehiculo"/>
+                                    <p:inputText value="#{vehiculosController.vehiculos.tipo_vehiculo}"/>                                                                                                            
+
+                                    <p:outputLabel value="Placa"/>
+                                    <p:inputMask mask="(P)-999-999" value="#{vehiculosController.vehiculos.placa}"/> 
+
+
+
+                                    <p:outputLabel value="Modelos"/>
+                                    <p:selectOneMenu id="ID_modelos" value="#{vehiculosController.modelos.id}" effect="fold" style="width: 240px">
+                                        <f:selectItem itemLabel="Seleccione un Modelo" itemValue="" noSelectionOption="true"/>
+                                        <f:selectItems var="mode" itemLabel="#{mode.modelo}" itemValue="#{mode.id}" value="#{modelosController.lista}"/>
+                                    </p:selectOneMenu>                           
+
+                                    <p:outputLabel value="Marcas"/>
+                                    <p:selectOneMenu id="ID_marcas" value="#{vehiculosController.marcas.id}" effect="fold" style="width: 240px">
+                                        <f:selectItem itemLabel="Seleccione un Vehiculo" itemValue="" noSelectionOption="true"/>
+                                        <f:selectItems var="mar" itemLabel="#{mar.marcas}" itemValue="#{mar.id}" value="#{marcasController.lista}"/>
+                                    </p:selectOneMenu>
+
+                                   
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="2">
+                                    <p:commandButton value="Guardar" actionListener="#{vehiculosController.guardar()}" update=":data"/>
+                                    <p:commandButton value="mostrar" actionListener="#{vehiculosController.consultarAll()}" update=":data"/>   
+                                </h:panelGrid>
+                            </h:form>
+                        </h:panelGrid>
+                    </p:panel>
+                </div>
+            </div>
+
+            <div class="rightcolumn">
+
+                <p:dataTable value="#{vehiculosController.lista}" var="lis" id="data">
+
+                    <p:column headerText="ID">
+                        <p:outputLabel value="#{lis.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Color">
+                        <p:outputLabel value="#{lis.color}"/>
+                    </p:column>
+
+                    <p:column headerText="Tipo de Vehiculo">
+                        <p:outputLabel value="#{lis.tipo_vehiculo}"/>
+                    </p:column>            
+
+                    <p:column headerText="Color">
+                        <p:outputLabel value="#{lis.color}"/>
+                    </p:column>
+
+                    <p:column headerText="Modelos">
+                        <p:outputLabel value="#{lis.ID_modelos.modelo}"/>
+                    </p:column>
+
+                    <p:column headerText="Empresas">
+                        <p:outputLabel value="#{lis.ID_marcas.marcas}"/>
+                    </p:column>
+
+                    <p:column headerText="Empresas">
+                        <p:outputLabel value="#{lis.ID_empresas.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Acciones">
+                        <p:commandButton value="Eliminar" actionListener="#{vehiculosController.eliminar(lis)}" update="data"/> 
+                        <p:commandButton value="editar" actionListener="#{vehiculosController.leerId(lis)}" update=":wgdatos" oncomplete="PF('w').show();"/> 
+                    </p:column>
+
+                </p:dataTable>
+
+                <p:dialog widgetVar="w" header="Datos" id="wgdatos">
+                    <h:form id="panel">
+
+                        <h:panelGrid columns="2">                         
+                            <p:outputLabel value="Color"/>
+                            <p:inputText value="#{vehiculosController.vehiculos.color}"/>
+
+                            <p:outputLabel value="Tipo de Vehiculo"/>
+                            <p:inputText value="#{vehiculosController.vehiculos.tipo_vehiculo}"/>                                                                                                            
+
+                            <p:outputLabel value="Placa"/>
+                            <p:inputText value="#{vehiculosController.vehiculos.placa}"/> 
+
+
+
+                            <p:outputLabel value="Modelos"/>
+                            <p:selectOneMenu id="ID_modelos" value="#{vehiculosController.modelos.id}" effect="fold" style="width: 240px">
+                                <f:selectItem itemLabel="Seleccione un Modelo" itemValue="" noSelectionOption="true"/>
+                                <f:selectItems var="mode" itemLabel="#{mode.modelo}" itemValue="#{mode.id}" value="#{modelosController.lista}"/>
+                            </p:selectOneMenu>                           
+
+                            <p:outputLabel value="Marcas"/>
+                            <p:selectOneMenu id="ID_marcas" value="#{vehiculosController.marcas.id}" effect="fold" style="width: 240px">
+                                <f:selectItem itemLabel="Seleccione un Vehiculo" itemValue="" noSelectionOption="true"/>
+                                <f:selectItems var="mar" itemLabel="#{mar.marcas}" itemValue="#{mar.id}" value="#{marcasController.lista}"/>
+                            </p:selectOneMenu>
+
+                         
+                        </h:panelGrid>                    
+
+
+                        <p:commandButton value="Editar" style="display: inherit" actionListener="#{vehiculosController.actualizar()}" oncomplete="PF('w').hide();" update=":data "/>
+
+                    </h:form>
+
+                </p:dialog>
+
+
+            </div>
+        </div>
+
+             </section>
+          <div class="footer">
+            <h2>Footer</h2>
+        </div>
+    </h:body>         
+</html>
+

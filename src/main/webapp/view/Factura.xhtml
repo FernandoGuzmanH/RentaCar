@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="../css/style.css"/>
+        <link rel="stylesheet" href="template/style.css"/>
+    </h:head>
+    <h:body>
+        
+          <ui:include src="../view/template/sideBar.xhtml"/>
+          <section>
+<div class="header">
+    <h1>#{facturasController.user.ID_empresas.nombre}</h1>
+</div>
+
+<div class="topnav">
+    
+</div>
+
+<div class="row">
+   <div class="leftcolumn">
+    <div class="card">
+        <p:panel id="horizontal" style="
+                 text-align: center;; width: 300px" header="Facturas" toggleOrientation="horizontal">
+        <h:panelGrid columns="2" cellpadding="10">
+          <h:form> 
+              <h:panelGrid columns="1">
+                  
+                        <p:outputLabel value="Persona"/>
+                        <p:selectOneMenu value="#{facturasController.personas.id}"  style="width: 240px">
+                            <f:selectItems var="per" value="#{personasController.lista}" itemValue="#{per.id}" itemLabel="#{per.nombre}"/>
+                        </p:selectOneMenu>   
+                        
+                        
+                        
+                        <p:outputLabel value="Estados"/>
+                        <p:selectOneMenu value="#{facturasController.estados.id}" style="width: 240px">
+                            <f:selectItems var="e" value="#{estadosController.lista}" itemValue="#{e.id}" itemLabel="#{e.tipo}"/>
+                        </p:selectOneMenu>  
+                        
+                        
+                      
+                            <p:outputLabel value="Correlativo"/>
+                            <p:inputText value="#{facturasController.facturas.correlativo}"/>
+                     
+                   
+                            <p:outputLabel value="Fecha"/>
+                            <p:calendar value="#{facturasController.facturas.fecha}"/>
+               
+                  
+                            <p:outputLabel value="Direccion"/>
+                            <p:inputText value="#{facturasController.facturas.direccion}"/>
+                                              
+                      
+            
+                    <h:panelGrid columns="2">
+                        <p:commandButton value="Guardar" actionListener="#{facturasController.guardar()}" update=":data"/>
+                        <p:commandButton value="mostrar" actionListener="#{facturasController.consultarAll()}" update=":data"/>   
+                    </h:panelGrid>
+            </h:panelGrid>
+                  
+                
+                </h:form>
+        </h:panelGrid>
+    </p:panel>
+    </div>
+  </div>
+    
+  <div class="rightcolumn">
+
+   <p:dataTable value="#{facturasController.lista}" var="lis" id="data">
+
+            <p:column headerText="Persona">
+                <p:outputLabel value="#{lis.ID_personas.nombre}"/>
+            </p:column>            
+            <p:column headerText="Estados">
+                <p:outputLabel value="#{lis.ID_estados.tipo}"/>
+            </p:column>   
+            <p:column headerText="Correlativo">
+                <p:outputLabel value="#{lis.correlativo}"/>
+            </p:column>   
+            <p:column headerText="Fecha">
+                <h:outputText value="#{lis.fecha}">
+                    <f:convertDateTime type="date"/>
+                </h:outputText>
+            </p:column>   
+            <p:column headerText="Empresa">
+                <p:outputLabel value="#{lis.ID_empresas.nombre}"/>
+            </p:column>   
+            <p:column headerText="Acciones">
+                <p:commandButton value="Eliminar" actionListener="#{facturasController.Eliminar(lis)}" update="data"/> 
+                <p:commandButton value="editar" actionListener="#{facturasController.leerId(lis)}" update=":wgdatos" oncomplete="PF('w').show();"/> 
+            </p:column>
+
+        </p:dataTable>
+
+        <p:dialog widgetVar="w" header="Datos" id="wgdatos">
+            <h:form>
+                <p:fieldset legend="Facturas">
+                    <p:outputLabel value="Persona"/>
+                    <p:selectOneMenu value="#{facturasController.personas.id}">
+                        <f:selectItems var="per" value="#{personasController.lista}" itemValue="#{per.id}" itemLabel="#{per.nombre}"/>
+                    </p:selectOneMenu>   
+                    <p:outputLabel value="Estados"/>
+                    <p:selectOneMenu value="#{facturasController.estados.id}">
+                        <f:selectItems var="e" value="#{estadosController.lista}" itemValue="#{e.id}" itemLabel="#{e.tipo}"/>
+                    </p:selectOneMenu>  
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="Correlativo"/>
+                        <p:inputText value="#{facturasController.facturas.correlativo}"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="Fecha"/>
+                        <p:calendar value="#{facturasController.facturas.fecha}" style="width: 240px"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="Direccion"/>
+                        <p:inputText value="#{facturasController.facturas.direccion}" style="width: 240px"/>
+                    </h:panelGrid>
+                    <p:outputLabel value="Empresa"/>
+                    <p:selectOneMenu value="#{facturasController.empresas.id}">
+                        <f:selectItems var="esta" value="#{estadosController.lista}" itemValue="#{esta.id}" itemLabel="#{esta.tipo}"/>
+                    </p:selectOneMenu>                  
+                    
+                </p:fieldset> 
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Actualizar" actionListener="#{facturasController.actualizar()}" update=":data" oncomplete="PF('w').hide();"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+
+
+  </div>
+</div>
+
+
+              </section>
+        <div class="footer">
+            <h2>Footer</h2>
+        </div>
+    </h:body>
+</html>
+

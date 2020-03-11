@@ -1,0 +1,104 @@
+
+
+body{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("https://a-static.besthdwallpaper.com/antecedentes-espectro-electromagnetico-papel-pintado-2560x1600-11211_7.jpg") no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    
+}
+
+#form-control:focus{
+  outline: none;
+  border-bottom: 1px solid #bf522f;
+}
+
+#form-control{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 0;
+    background: transparent;
+    border-bottom: 1px solid #2c8897;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-family: courier;
+    transition: all 0.5s ease;
+}
+
+#form-control2:focus{
+  outline: none;
+  border-bottom: 1px solid #bf522f;
+}
+
+#form-control2{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 0;
+    background: transparent;
+    border-bottom: 1px solid #2c8897;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-family: courier;
+    transition: all 0.5s ease;
+}
+
+section{
+    font-family: sans-serif;
+}
+
+.login-box{
+    background: rgba(255, 255, 255, 0.0);
+    padding: 20px 80px;
+    border-radius: 25px;
+}
+
+section .logo{
+    text-align: center;
+    color: #fff;
+    transition: all 0.5s ease;
+}
+
+section .logo:hover{
+    color: #bf522f;
+}
+
+.logo i{
+    font-size: 75px;
+}
+
+#btn{
+    background: #bf522f;
+    color: #fff;
+    font-size: 20px;
+    width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+#btn:hover{
+    background: #2c8897;
+}
+
+.nuevo{
+    margin-left: 50%;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: color 0.5s ease;
+}
+
+.nuevo:hover{
+    color: rgba(255, 255, 255, 1.0);
+}

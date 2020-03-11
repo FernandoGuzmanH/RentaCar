@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="../css/StyleLogin.css"/>
+    </h:head>
+    <h:body>
+        <section>
+            <div class="login-box">
+                
+              <p:growl id="msj"/>
+            <h:form>
+
+                <h:panelGrid columns="1">
+                  
+                    
+               <h:outputLabel value="Empresa"/>
+               <p:selectOneMenu id="ID_empresas" value="#{usuarioController.empresa.id}" editable="true" 
+                                style="width: 100%;
+                        padding: 8px 8px;
+                        margin: 8px 0;
+                        display: inline-block;
+                        background: #fff;
+                        border: 1px solid #fff;
+                        box-sizing: border-box;
+                        font-size: 20px;
+                        font-family: courier;
+                        color: #fff;
+                        transition: all 0.5s ease;"
+                                >
+                   <f:selectItems var="Emp" value="#{empresasController.lista}" itemValue="#{Emp.id}" itemLabel="#{Emp.nombre}" itemDisabled="true" />
+               </p:selectOneMenu>
+                    
+                    
+                    <h:outputLabel value="Usuario"/>
+                    <h:inputText
+                        style="width: 100%;
+                        padding: 12px 20px;
+                        margin: 8px 0;
+                        display: inline-block;
+                        background: transparent;
+                        border: 1px solid #fff;
+                        box-sizing: border-box;
+                        font-size: 20px;
+                        font-family: courier;
+                        color: #fff;
+                        transition: all 0.5s ease;"
+                        value="#{usuarioController.usuario.usuario}"/>
+
+                    <h:outputLabel value="Clave"/>
+                    <p:password 
+                        style="width: 100%;
+                        padding: 12px 20px;
+                        margin: 8px 0;
+                        display: inline-block;
+                        background: transparent;
+                        border: 1px solid #fff;
+                        box-sizing: border-box;
+                        font-size: 20px;
+                        font-family: courier;
+                        color: #fff;
+                        transition: all 0.5s ease;"
+                        value="#{usuarioController.usuario.clave}"/>
+
+
+                    <p:commandButton 
+                        style="background: violet;
+                        color: #fff;
+                        font-size: 20px;
+                        width: 100%;
+                        padding: 2px 5px;
+                        margin: 8px 0;
+                        display: inline-block;
+                        border: none;
+                        border-radius: 25px;
+                        cursor: pointer;
+                        transition: all 0.5s ease;" 
+                        value="Guardar" actionListener="#{usuarioController.guardar()}" update=":msj"/>
+
+                    
+                    <a href="login.xhtml">Registrar Empresa</a>
+
+                </h:panelGrid>
+
+
+            </h:form>
+            </div>
+        </section>
+          
+   
+
+
+
+          
+
+
+
+
+
+
+    </h:body>
+</html>
+

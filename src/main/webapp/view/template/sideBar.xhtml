@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="style.css"/>
+    </h:head>
+    <h:body>
+        <ui:composition >
+        <input type="checkbox" id="check"/>
+            <label for="check">
+                <i id="btn">≡</i>
+                <i id="cancel">X</i>
+            </label>
+        
+            <div class="sidebar">
+                <header>Menu</header>
+                <ul>
+                    <li><a href="../view/Contrato.xhtml">Contratos</a></li>
+                    <li><a href="../view/Detalle_Entrada.xhtml">Detalle Entrada</a></li>
+                    <li><a href="../view/Detalle_contrato.xhtml">Detalle Contrato</a></li>
+                    <li><a href="../view/Detalle_factura.xhtml">Detalle Factura</a></li>
+                    <li><a href="../view/Estado.xhtml">Estado</a></li>
+                    <li><a href="../view/Factura.xhtml">Factura</a></li>
+                     <li><a href="../view/Marcas.xhtml">Marcas</a></li>
+                      <li><a href="../view/Modelos.xhtml">Modelos</a></li>
+                       <li><a href="../view/Vehiculo.xhtml">Vehiculo</a></li>
+                       <li><a href="../view/Personas.xhtml">Empleado</a></li>
+                    
+                       <li><p:commandLink actionListener="#{usuarioController.cerrarsession()}" value="Cerrar" /></li>
+                       
+                       
+                </ul>
+            </div>
+         
+        </ui:composition>
+    </h:body>
+</html>
+

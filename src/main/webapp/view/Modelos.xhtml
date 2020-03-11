@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="../css/style.css"/>
+           <link rel="stylesheet" href="template/style.css"/>
+    </h:head>
+    <h:body>
+        
+            <ui:include src="../view/template/sideBar.xhtml"/>
+            <section>
+<div class="header">
+    <h1>#{modelosController.user.ID_empresas.nombre}</h1>
+</div>
+
+<div class="topnav">
+    
+</div>
+
+<div class="row">
+   <div class="leftcolumn">
+    <div class="card">
+        <p:panel id="horizontal" style="
+                 text-align: center;; width: 300px" header="Modelos" toggleOrientation="horizontal">
+        <h:panelGrid columns="2" cellpadding="10">
+           <h:form>
+               <h:panelGrid columns="1">
+                           
+            <p:outputLabel value="Modelo"/>
+            <p:inputText value="#{modelosController.modelos.modelo}" style="width: 250px"/>
+
+            <p:outputLabel value="Año"/>
+            <p:inputText type="number" value="#{modelosController.modelos.anio}" style="width: 250px"/>
+            <h:panelGrid columns="2">
+                 <p:commandButton value="Guardar" actionListener="#{modelosController.guardar()}" update=":table"/>
+                 <p:commandButton value="mostrar" actionListener="#{modelosController.consultALl()}" update=":table"/> 
+            </h:panelGrid>
+               </h:panelGrid>
+                   
+                   </h:form>
+        </h:panelGrid>
+    </p:panel>
+    </div>
+  </div>
+    
+  <div class="rightcolumn">
+
+
+  <p:dataTable value="#{modelosController.lista}" var="a" id="table">
+            <p:column headerText="Modelos">
+                <p:outputLabel value="#{a.modelo}"/>
+            </p:column>
+            <p:column headerText="Empresa">
+                <p:outputLabel value="#{a.ID_empresas.nombre}"/>
+            </p:column>
+
+            <p:column headerText="eliminar">
+                <p:commandButton value="Eliminar" actionListener="#{modelosController.eliminar(a)}" update="table"/>
+            </p:column>
+            <p:column headerText="modificar">
+                <p:commandButton value="Actualizar" actionListener="#{modelosController.leerId(a)}" oncomplete="PF('a').show();" 
+                                 update=":dialogo"/>
+            </p:column>
+        </p:dataTable>
+      
+        <p:dialog header="Datos a modificar" id="dialogo"  widgetVar="a" >
+           <h:form>
+               <h:panelGrid columns="1">
+                           
+            <p:outputLabel value="Modelo"/>
+            <p:inputText value="#{modelosController.modelos.modelo}" style="width: 250px"/>
+
+            <p:outputLabel value="Modelo"/>
+            <p:inputText type="number" value="#{modelosController.modelos.anio}" style="width: 250px"/>
+
+           
+            <h:panelGrid columns="2">
+               <p:commandButton value="Actualizar" actionListener="#{modelosController.actualizar()}" update=":table" 
+                                 oncomplete="PF('a').hide();"/>
+                <p:commandButton value="cancelar" oncomplete="PF('a').hide();" />
+
+            </h:panelGrid>
+           
+               </h:panelGrid>
+                   
+                   </h:form>
+        </p:dialog>
+
+
+  </div>
+</div>
+
+               
+
+                </section>
+             <div class="footer">
+            <h2>Footer</h2>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="../css/style.css"/>
+        <link rel="stylesheet" href="template/style.css"/>
+    </h:head>
+    <h:body>
+
+
+        |       <ui:include src="../view/template/sideBar.xhtml"/>
+        <section>
+            <div class="header">
+                <h1>#{reparacionesController.user.ID_empresas.nombre}</h1>
+            </div>
+
+            <div class="topnav">
+
+            </div>
+
+            <div class="row">
+                <div class="leftcolumn">
+                    <div class="card">
+                        <p:panel id="horizontal" style="
+                                 text-align: center;; width: 300px" header="Reparaciones" toggleOrientation="horizontal">
+                            <h:panelGrid columns="2" cellpadding="10">
+
+                                <h:form>
+
+                                    <h:panelGrid columns="1">
+                                        <p:outputLabel value="Tipo de Daño"/>
+                                        <p:inputText value="#{reparacionesController.reparaciones.tipo_danio}" style="width: 250px"/>
+
+                                        <p:outputLabel value="Descripcion"/>
+                                        <p:inputText value="#{reparacionesController.reparaciones.descripcion}" style="width: 250px"/>                                                                                                            
+
+                                        <p:outputLabel value="Vehiculos"/>
+                                        <p:selectOneMenu id="ID_vehiculos" value="#{reparacionesController.vehiculos.id}" style="width: 250px">
+                                            <f:selectItem itemLabel="Seleccione un Vehiculo" itemValue="" noSelectionOption="true"/>
+                                            <f:selectItems var="vehiculos" itemLabel="#{vehiculos.placa}" itemValue="#{vehiculos.id}" value="#{vehiculosController.lista}"/>
+                                        </p:selectOneMenu>
+
+
+
+                                    </h:panelGrid>
+
+
+                                    <h:panelGrid columns="2" >
+                                        <p:commandButton value="Guardar" actionListener="#{reparacionesController.guardar()}" update=":data"/>
+                                        <p:commandButton value="mostrar" actionListener="#{reparacionesController.consultarAll()}" update=":data"/>   
+                                    </h:panelGrid>
+                                </h:form>
+
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </div>
+                </div>
+
+                <div class="rightcolumn">
+
+
+                    <p:dataTable value="#{reparacionesController.lista}" var="lis" id="data">
+
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{lis.id}"/>
+                        </p:column>
+
+                        <p:column headerText="Tipo de Daño">
+                            <p:outputLabel value="#{lis.tipo_danio}"/>
+                        </p:column>
+
+                        <p:column headerText="Descripcion">
+                            <p:outputLabel value="#{lis.descripcion}"/>
+                        </p:column>            
+
+                        <p:column headerText="Vehiculos">
+                            <p:outputLabel value="#{lis.ID_vehiculos.placa}"/>
+                        </p:column>
+
+                        <p:column headerText="Empresas">
+                            <p:outputLabel value="#{lis.ID_empresas.nombre}"/>
+                        </p:column>
+
+                        <p:column headerText="Acciones">
+                            <p:commandButton value="Eliminar" actionListener="#{reparacionesController.eliminar(lis)}" update="data"/> 
+                            <p:commandButton value="editar" actionListener="#{reparacionesController.leerId(lis)}" update=":wgdatos" oncomplete="PF('w').show();"/> 
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <p:dialog widgetVar="w" header="Datos" id="wgdatos">
+                        <h:form id="panel">
+                            <p:fieldset legend="Nombre">
+                                <h:panelGrid columns="2">                         
+                                    <p:outputLabel value="Tipo de Daño"/>
+                                    <p:inputText value="#{reparacionesController.reparaciones.tipo_danio}" style="width: 250px"/>
+
+                                    <p:outputLabel value="Descripcion"/>
+                                    <p:inputText value="#{reparacionesController.reparaciones.descripcion}" style="width: 250px"/>                                                                                                            
+
+                                    <p:outputLabel value="Vehiculos"/>
+                                    <p:selectOneMenu id="ID_vehiculos" value="#{reparacionesController.vehiculos.id}" style="width: 250px">
+                                        <f:selectItem itemLabel="Seleccione un Vehiculo" itemValue="" noSelectionOption="true"/>
+                                        <f:selectItems var="vehiculos" itemLabel="#{vehiculos.placa}" itemValue="#{vehiculos.id}" value="#{vehiculosController.lista}"/>
+                                    </p:selectOneMenu>
+                                </h:panelGrid>                    
+                            </p:fieldset>
+
+                            <p:commandButton value="Editar" style="display: inherit" actionListener="#{reparacionesController.actualizar()}" oncomplete="PF('w').hide();" update=":data ">
+                                <p:effect type="puff" event="click" for="">                            
+                                </p:effect>
+                            </p:commandButton>
+                        </h:form>
+                    </p:dialog>
+
+                </div>
+            </div>
+
+        </section>
+         <div class="footer">
+            <h2>Footer</h2>
+        </div>
+    </h:body>
+
+</html>
+

@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="../css/style.css"/>
+        <link rel="stylesheet" href="template/style.css"/>
+    </h:head>
+    <h:body>
+        
+         <ui:include src="../view/template/sideBar.xhtml"/>
+         <section>
+<div class="header">
+    <h1>#{rollController.user.ID_empresas.nombre}</h1>
+</div>
+
+<div class="topnav">
+    
+</div>
+
+<div class="row">
+   <div class="leftcolumn">
+    <div class="card">
+        <p:panel id="horizontal" style="
+                 text-align: center;; width: 300px" header="Roles"  toggleOrientation="horizontal">
+        <h:panelGrid columns="2" cellpadding="10">
+             <h:form>
+                 
+                        <h:panelGrid columns="1">
+                            <h2>Tipos</h2>
+                            <p:inputText value="#{rollController.rolles.tipo}"
+                                         style="width: 250px"/>
+                        </h:panelGrid>
+                 <br/>
+                    <h:panelGrid columns="2">
+                        <p:commandButton value="Guardar" actionListener="#{rollController.guardar()}" update=":data"  />
+                        <p:commandButton value="mostrar" actionListener="#{rollController.consultarAll()}" update=":data"/>   
+                    </h:panelGrid>
+                </h:form>
+        </h:panelGrid>
+    </p:panel>
+    </div>
+  </div>
+    
+  <div class="rightcolumn">
+ <p:dataTable value="#{rollController.lista}" var="lis" id="data" >
+
+            <p:column headerText="Tipo">
+                <p:outputLabel value="#{lis.tipo}"/>
+            </p:column>           
+            <p:column headerText="Acciones">
+                <p:commandButton value="Eliminar" actionListener="#{rollController.Eliminar(lis)}" update="data" /> 
+                <p:commandButton value="editar" actionListener="#{rollController.leerId(lis)}" update=":wgdatos" oncomplete="PF('w').show();"/> 
+            </p:column>
+        </p:dataTable>
+      
+      <br/>
+        <p:dialog widgetVar="w" header="Datos" id="wgdatos">
+            <h:form>
+                <p:fieldset legend="Tipo">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="Tipo"/>
+                        <p:inputText value="#{rollController.rolles.tipo}"/>
+                    </h:panelGrid>
+                </p:fieldset>                
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Actualizar" actionListener="#{rollController.actualizar()}" update=":data" oncomplete="PF('w').hide();"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+  </div>
+</div>
+             </section>
+ <div class="footer">
+            <h2>Footer</h2>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="../css/style.css"/>
+        <link rel="stylesheet" href="template/style.css"/>
+    </h:head>
+    <h:body>
+
+        <ui:include src="../view/template/sideBar.xhtml"/>
+        <section>
+            <div class="header">
+                <h1>#{empresasController.user.ID_empresas.nombre}</h1>
+            </div>
+
+            <div class="topnav">
+
+            </div>
+
+            <div class="row">
+                <div class="leftcolumn">
+                    <div class="card">
+                        <p:panel id="horizontal" style="
+                                 text-align: center;; width: 300px" header="Personas" toggleOrientation="horizontal">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <h:form>
+                                    <h:panelGrid columns="1">
+                                        <p:outputLabel value="Nombre"/>
+                                        <p:inputText value="#{personasController.personas.nombre}"  style="width: 250px"/>
+
+                                        <p:outputLabel value="Apellido"/>
+                                        <p:inputText value="#{personasController.personas.apellido}" style="width: 250px"/>
+
+                                        <p:outputLabel value="Edad"/>
+                                        <p:inputText value="#{personasController.personas.edad}" style="width: 250px"/>
+
+                                        <p:outputLabel value="Dui"/>
+                                        <p:inputMask mask="99999999-9" value="#{personasController.personas.dui}" style="width: 250px"/>
+
+                                        <p:outputLabel value="Direccion"/>
+                                        <p:inputText value="#{personasController.personas.direccion}" style="width: 250px"/>
+
+                                        <p:outputLabel value="Telefono"/>
+                                        <p:inputMask mask="9999-9999" value="#{personasController.personas.telefono}" style="width: 250px"/>
+
+
+                                        <p:outputLabel value="Rolles"/>
+                                        <p:selectOneMenu id="ID_rolles" value="#{personasController.rolles.id}" style="width: 250px">
+                                            <f:selectItem itemLabel="Seleccione un Roll" itemValue="" noSelectionOption="true"/>
+                                            <f:selectItems var="rolles" itemLabel="#{rolles.tipo}" itemValue="#{rolles.id}" value="#{rollController.lista}"/>
+                                        </p:selectOneMenu>
+                                        
+                                    </h:panelGrid>
+
+
+
+                                    <h:panelGrid columns="2">
+                                        <p:commandButton value="Guardar" actionListener="#{personasController.guardar()}" update=":data"/>
+                                        <p:commandButton value="mostrar" actionListener="#{personasController.consultarAll()}" update=":data"/>   
+                                    </h:panelGrid>
+                                </h:form>
+
+
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </div>
+                </div>
+
+                <div class="rightcolumn">
+
+
+                    <p:dataTable value="#{personasController.lista}" var="lis" id="data">
+
+                        <p:column headerText="Nombre">
+                            <p:outputLabel value="#{lis.nombre}"/>
+                        </p:column>
+
+                        <p:column headerText="Apellido">
+                            <p:outputLabel value="#{lis.apellido}"/>
+                        </p:column>
+
+                        <p:column headerText="Edad">
+                            <p:outputLabel value="#{lis.edad}"/>
+                        </p:column>
+
+                        <p:column headerText="Dui">
+                            <p:outputLabel value="#{lis.dui}"/>
+                        </p:column>
+
+                        <p:column headerText="Direccion">
+                            <p:outputLabel value="#{lis.direccion}"/>
+                        </p:column>
+
+                        <p:column headerText="Telefono">
+                            <p:outputLabel value="#{lis.telefono}"/>
+                        </p:column>
+
+                        <p:column headerText="Roll">
+                            <p:outputLabel value="#{lis.ID_rolles.tipo}"/>
+                        </p:column>
+                        <p:column headerText="Empresas">
+                            <p:outputLabel value="#{lis.ID_empresas.nombre}"/>
+                        </p:column>
+
+                        <p:column headerText="Acciones">
+                            <p:commandButton value="Eliminar" actionListener="#{personasController.eliminar(lis)}" update="data"/> 
+                            <p:commandButton value="editar" actionListener="#{personasController.leerId(lis)}" update=":wgdatos" oncomplete="PF('w').show();"/> 
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <p:dialog widgetVar="w" header="Datos" id="wgdatos">
+                        <h:form id="panel">
+                            <p:fieldset legend="Nombre">
+                                <h:panelGrid columns="2">
+                                    <p:outputLabel value="Nombre"/>
+                                    <p:inputText value="#{personasController.personas.nombre}" style="width: 250px"/>
+
+                                    <p:outputLabel value="Apellido"/>
+                                    <p:inputText value="#{personasController.personas.apellido}" style="width: 250px"/>
+
+                                    <p:outputLabel value="Edad"/>
+                                    <p:inputText value="#{personasController.personas.edad}" style="width: 250px"/>
+
+                                    <p:outputLabel value="Dui"/>
+                                     <p:inputMask mask="99999999-9" value="#{personasController.personas.dui}" style="width: 250px"/>
+
+                                    <p:outputLabel value="Direccion"/>
+                                    <p:inputText value="#{personasController.personas.direccion}" style="width: 250px"/>
+
+                                    <p:outputLabel value="Telefono"/>
+                                   <p:inputMask mask="9999-9999" value="#{personasController.personas.telefono}" style="width: 250px"/>
+
+                                    <p:outputLabel value="Rolles"/>
+                                    <p:selectOneMenu id="ID_rolles" value="#{personasController.rolles.id}" style="width: 250px">
+                                        <f:selectItem itemLabel="Seleccione un Roll" itemValue="" noSelectionOption="true"/>
+                                        <f:selectItems var="rolles" itemLabel="#{rolles.tipo}" itemValue="#{rolles.id}" value="#{rollController.lista}"/>
+                                    </p:selectOneMenu>
+                                   
+                                </h:panelGrid>
+                            </p:fieldset>
+
+                            <p:commandButton value="Editar" style="display: inherit" actionListener="#{personasController.actualizar()}" oncomplete="PF('w').hide();" update=":data">
+                                <p:effect type="puff" event="click" for="">                            
+                                </p:effect>
+                            </p:commandButton>
+                        </h:form>
+                    </p:dialog>
+
+
+                </div>
+            </div>
+
+
+        </section>
+        <div class="footer">
+            <h2>Footer</h2>
+        </div>
+    </h:body>
+
+</html>
+

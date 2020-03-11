@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="../css/StyleLogin.css"/>
+    </h:head>
+    <h:body>
+          <h:form>
+            <section>
+                <div class="login-box">
+                    <div class="form-group logo">
+                        <i class="fas fa-user-lock"></i>
+                        <h2>Iniciar Sesion</h2>
+                    </div>
+                    <div class="form-group">
+                        <p:inputText style="width: 100%;
+                                     padding: 12px 20px;
+                                     margin: 8px 0;
+                                     display: inline-block;
+                                     background: transparent;
+                                     border: 1px solid #fff;
+                                     box-sizing: border-box;
+                                     font-size: 20px;
+                                     font-family: courier;
+                                     color: #fff;
+                                     transition: all 0.5s ease;"
+                                     value="#{usuarioController.usuario.usuario}" />
+                    </div>
+                    <div class="form-group">
+                        <p:password  
+                             style="width: 100%;
+                                     padding: 12px 20px;
+                                     margin: 8px 0;
+                                     display: inline-block;
+                                     background: transparent;
+                                     border: 1px solid #fff;
+                                     box-sizing: border-box;
+                                     font-size: 20px;
+                                     font-family: courier;
+                                     color: #fff;
+                                     transition: all 0.5s ease;"
+                                     value="#{usuarioController.usuario.clave}" />
+                    </div>
+                    <div class="form-group">
+                        <p:commandButton  
+                            style="background: violet;
+                                         color: #fff;
+                                         font-size: 20px;
+                                         width: 100%;
+                                         padding: 2px 5px;
+                                         margin: 8px 0;
+                                         display: inline-block;
+                                         border: none;
+                                         border-radius: 25px;
+                                         cursor: pointer;
+                                         transition: all 0.5s ease;"  value="Entra" action="#{usuarioController.validar()}" />                    
+                            <a class="nuevo" href="Nuevo_usuario.xhtml">Nueva Empresa</a>
+                           
+                    </div>
+                </div>
+            </section>
+        </h:form>
+    </h:body>
+</html>
+
